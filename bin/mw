@@ -91,6 +91,12 @@ set folder = \"$folder\"
 set header_cache = $cachedir/$fulladdr/headers
 set message_cachedir = $cachedir/$fulladdr/bodies
 set mbox_type = Maildir
+
+# additions made
+set sidebar_short_path
+set sidebar_indent_string="  "
+set sidebar_width=24
+
 $extra
 
 bind index,pager gg noop
@@ -101,7 +107,7 @@ bind index gg first-entry
 unmailboxes *
 unalternates *
 unset signature
-unmacro index o
+unmacro index S
 $synccmd
 " > "$accdir/$idnum-$fulladdr.muttrc"
 
@@ -125,10 +131,10 @@ set imap_pass = \"\`pass $fulladdr\`\"
 set ssl_starttls = yes
 set ssl_force_tls = yes"
 			;;
-		pop) synccmd="macro index o \"<shell-escape>mpop $fulladdr<enter>\" \"run mpop to get $fulladdr's mail\""
+		pop) synccmd="macro index S \"<shell-escape>mpop $fulladdr<enter>\" \"run mpop to get $fulladdr's mail\""
 			folder="$maildir/$fulladdr"
 			prepmpop ;;
-		*) synccmd="macro index o \"<shell-escape>mw -y $fulladdr<enter>\" \"run mbsync to sync $fulladdr\""
+		*) synccmd="macro index S \"<shell-escape>mw -y $fulladdr<enter>\" \"run mbsync to sync $fulladdr\""
 			folder="$maildir/$fulladdr"
 			prepmbsync ;;
 	esac
